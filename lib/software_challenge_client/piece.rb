@@ -43,22 +43,41 @@ class Piece
     @coords = coords_priv
   end
 
+  # Dreht den Stein
+  def rotate(rotation)
+    Piece.new(@color,@kind,@rotation.rotate(rotation),@is_flipped,@position)
+  end
+
   # Flipped den Stein
   def flip!(f = true)
     @is_flipped = @is_flipped ^ f
     @coords = coords_priv
   end
 
+  # Flipped den Stein
+  def flip(f = true)
+    Piece.new(@color,@kind,@rotation,@is_flipped ^ f,@position)
+  end
+
   # Setzt den Stein auf eine Position
   def locate!(position)
     @position = position
     @coords = coords_priv
+    
+  # Setzt den Stein auf eine Position
+  def locate(position)
+    Piece.new(@color,@kind,@rotation,@is_flipped,position)
   end
 
   # Verschiebt den Stein
   def move!(shift)
-    @position = position + shift
+    @position = @position + shift
     @coords = coords_priv
+  end
+
+  # Verschiebt den Stein
+  def move(shift) 
+    Piece.new(@color,@kind,@rotation,@is_flipped,@position + shift)
   end
 
   # Gibt die Fläche der transformierten Steinform von diesem Stein zurück
